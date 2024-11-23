@@ -7,16 +7,147 @@
             "niveau" : 1,
             "question" : {
                 "énoncé":"Lequel de ces objets à la forme d’un tore : une chaise, un sapin de Noël ou une bouée ?",
-                "indice":"",
                 "commentaire": "Cette question est évidente pour n'importe qui qui à déjà entendu parler de tore"
             },
             "réponse" : {
                 "réponse" : "une bouée",
                 "explication" : "Un tore est une surface géometrique qui ressemble à une bouée, selon les paramètres que l'on choisit, il peut ressembler plutot a un anneau ou plutot à un donut.",
-                "commentaire" : ""
+                "source" : "https://fr.wikipedia.org/wiki/Tore"
             },
             "origine" : {
                 "source" : "",
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 2,
+            "question" : {
+                "énoncé":"Combien possède de trous un tore simple ?"
+            },
+            "réponse" : {
+                "réponse" : "1",
+                "source" : "https://fr.wikipedia.org/wiki/Tore"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 2,
+            "question" : {
+                "énoncé":"Citer un jeu qui utilise les propriétés du tore dans les déplacements des personnages ?"
+            },
+            "réponse" : {
+                "réponse" : "PacMan",
+                "source" : "https://analysis-situs.math.cnrs.fr/Les-premieres-surfaces-la-sphere-le-cylindre-le-tore.html"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 3,
+            "question" : {
+                "énoncé":"Lequel de ces objets est homéomorphe à un tore : un bol, une tasse, un verre à pied ?"
+            },
+            "réponse" : {
+                "réponse" : "Une tasse",
+                "source" : "https://fr.wikipedia.org/wiki/Hom%C3%A9omorphisme"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 4,
+            "question" : {
+                "énoncé":"Le théorème des 4 couleurs énonce qu’il n’y a besoin que de 4 couleurs pour colorier les différentes parties d’une carte sur un plan, celui-ci est faux sur un tore. Combien faut-il au minimum de couleur dans ce cas ?"
+            },
+            "réponse" : {
+                "réponse" : "7",
+                "source" : "https://fr.wikipedia.org/wiki/Tore#Colorier_un_tore"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 5,
+            "question" : {
+                "énoncé":"Quelle est la caractéristique d’Euler du tore ?"
+            },
+            "réponse" : {
+                "réponse" : "0",
+                "source" : "https://fr.wikipedia.org/wiki/Tore#Caract%C3%A9ristique_d'Euler_d'un_tore"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 6,
+            "question" : {
+                "énoncé":"Laquelle de ces définitions du tore n’est pas correcte : $\\mathbb{R}/\\mathbb{Z}\\times\\mathbb{R}/\\mathbb{Z}$, $\\mathbb{S}_1 \\times \\mathbb{S}_1$ ou $\\sqrt{x^2+y^2+z^2}=R^2-r^2$"
+            },
+            "réponse" : {
+                "réponse" : "$\\sqrt{x^2+y^2+z^2}=R^2-r^2$",
+                "source" : "https://fr.wikipedia.org/wiki/Tore#%C3%89quations_du_tore"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 7,
+            "question" : {
+                "énoncé":"De quelle manière faut-il sectionner un tore pour obtenir les cercles de Villarceau ?"
+            },
+            "réponse" : {
+                "réponse" : "Selon un plan diagonal bitangent qui passe par le centre du tore.",
+                "commentaire" : "une description “avec les mains” peut être acceptée",
+                "source" : "https://fr.wikipedia.org/wiki/Tore#Cercles_de_Villarceau"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 8,
+            "question" : {
+                "énoncé":"En électricité, pour le circuit magnétique de quelle machine électrique utilise-t-on idéalement le tore ?"
+            },
+            "réponse" : {
+                "réponse" : "Le transformateur",
+                "commentaire" : "La bobine de manière générale est acceptée.",
+                "source" : "https://fr.wikipedia.org/wiki/Tore#Applications"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 9,
+            "question" : {
+                "énoncé":"Qu’est-ce que le tore de Stanford ?"
+            },
+            "réponse" : {
+                "réponse" : "Il s’agit d’un design imaginé pour la fabrication de mégatructures spatiales et ayant pour objectif de recréer artificiellement la gravité terrestre par effet centrifuge.",
+                "source" : "https://fr.wikipedia.org/wiki/Tore_de_Stanford"
+            },
+            "origine" : {
+                "auteur" : "Robin Menestret"
+            }
+        },
+        {
+            "niveau" : 2,
+            "question" : {
+                "énoncé":"Parmi les différents modèles mathématiques cherchant une description géométrique de l’univers, il existe celle d’un tore tridimensionnel. Cette description n’est pourtant pas la plus répandue. Pour quelle raison ?"
+            },
+            "réponse" : {
+                "réponse" : "Car le tore tridimensionnel n’est pas simplement connexe.",
+                "source" : "https://fr.wikipedia.org/wiki/Univers_en_tore_bidimensionnel"
+            },
+            "origine" : {
                 "auteur" : "Robin Menestret"
             }
         }

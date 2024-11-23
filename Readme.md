@@ -12,3 +12,5 @@ TODO : trouver un exemple.
 Voici une liste de principes qui peuvent évoluer :
 
 1. Seuls les questions elles-mêmes ont des auteurs.
+2. Les formules sont écrites en latex.
+3. Il est conseillé d'indiquer les sources qui justifient la réponse à une question, surtout si vous êtes l'auteur de la question. (souvent la page wikipedia du sujet peut suffire)

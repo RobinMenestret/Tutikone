@@ -45,6 +45,9 @@
                   },
                   "commentaire": {
                     "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
                   }
                 },
                 "required": [
