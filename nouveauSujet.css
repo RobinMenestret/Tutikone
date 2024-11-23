@@ -139,4 +139,38 @@ body {
     color: #fff;
     border-color: #2980b9;
   }
+
+  
+  button[onclick="importJSON()"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+  }
+  
+  button[onclick="importJSON()"]:hover {
+    background-color: #2980b9;
+  }
+  
+  button[onclick="importJSON()"]:active {
+    background-color: #1f5d8c;
+  }
+
+  div {
+    text-align: center;
+    margin: 20px auto;
+  }
+  
+  input[type="file"] {
+    width:40%;
+  }
+  
+  input[type="file"]:hover {
+    background-color: #e8f5e9;
+  }
   

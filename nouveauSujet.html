@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Créateur de JSON</title>
+  <title>Créateur de Sujet</title>
   <link rel="stylesheet" href="nouveauSujet.css">
 </head>
+
 <body>
-  <h1>Création de JSON via Questionnaire</h1>
+  <h1>Créateur/Modificateur de Sujet </h1>
+  <div align="center">
+    <input type="file" id="import-json" accept="application/json">
+    <button type="button" onclick="importJSON()">Importer le JSON</button>
+  </div>
   <form id="jsonForm">
     <label for="nom">Nom :</label><br>
     <input type="text" id="nom" name="nom" required><br><br>
@@ -26,6 +32,52 @@
   <a id="downloadLink" style="display: none;">Télécharger le JSON</a>
 
   <script>
+    function importJSON() {
+      const inputFile = document.querySelector('#import-json');
+      const file = inputFile.files[0];
+
+      if (!file) {
+        alert("Veuillez sélectionner un fichier JSON.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        try {
+          const importedData = JSON.parse(event.target.result);
+          console.log(importedData);
+
+          // Remplir le formulaire
+          document.querySelector('#nom').value = importedData.nom || '';
+          document.querySelector('#description').value = importedData.description || '';
+
+          // Ajouter les questions importées
+          importedData.questions.forEach((question, index) => {
+            addQuestion(); // Crée une nouvelle question
+
+            const questionDiv = document.querySelectorAll('.question')[index];
+
+            // Remplir les champs de la question
+            questionDiv.querySelector(`input[name="niveau${index}"][value="${question.niveau}"]`).checked = true;
+            questionDiv.querySelector(`#enonce${index}`).value = question.question.énoncé || '';
+            questionDiv.querySelector(`#indice${index}`).value = question.question.indice || '';
+            questionDiv.querySelector(`#commentaireQuestion${index}`).value = question.question.commentaire || '';
+            questionDiv.querySelector(`#reponse${index}`).value = question.réponse.réponse || '';
+            questionDiv.querySelector(`#explication${index}`).value = question.réponse.explication || '';
+            questionDiv.querySelector(`#commentaireReponse${index}`).value = question.réponse.commentaire || '';
+            questionDiv.querySelector(`#sourceReponse${index}`).value = question.réponse.source || '';
+            questionDiv.querySelector(`#sourceOrigine${index}`).value = question.origine.source || '';
+            questionDiv.querySelector(`#auteur${index}`).value = question.origine.auteur || '';
+          });
+        } catch (error) {
+          alert("Erreur lors de l'importation du fichier JSON : " + error.message);
+        }
+      };
+
+      reader.readAsText(file);
+    }
+
+
     function addQuestion() {
       const questionIndex = document.querySelectorAll('.question').length;
       const questionDiv = document.createElement('div');
@@ -72,90 +124,91 @@
       questionsContainer.appendChild(questionDiv);
     }
     function generateJSON() {
-  const questions = [];
-  const questionElements = document.querySelectorAll('.question');
+      const questions = [];
+      const questionElements = document.querySelectorAll('.question');
 
-  questionElements.forEach((questionElement, index) => {
-    // Récupération du niveau sélectionné
-    const niveau = questionElement.querySelector(`input[name="niveau${index}"]:checked`);
-    if (!niveau) {
-      alert(`Veuillez sélectionner un niveau pour la question ${index + 1}.`);
-      return;
+      questionElements.forEach((questionElement, index) => {
+        // Récupération du niveau sélectionné
+        const niveau = questionElement.querySelector(`input[name="niveau${index}"]:checked`);
+        if (!niveau) {
+          alert(`Veuillez sélectionner un niveau pour la question ${index + 1}.`);
+          return;
+        }
+
+        // Récupération des autres champs
+        const enonce = questionElement.querySelector(`#enonce${index}`).value;
+        const indice = questionElement.querySelector(`#indice${index}`).value;
+        const commentaireQuestion = questionElement.querySelector(`#commentaireQuestion${index}`).value;
+
+        const reponse = questionElement.querySelector(`#reponse${index}`).value;
+        const explication = questionElement.querySelector(`#explication${index}`).value;
+        const commentaireReponse = questionElement.querySelector(`#commentaireReponse${index}`).value;
+        const sourceReponse = questionElement.querySelector(`#sourceReponse${index}`).value;
+
+        const sourceOrigine = questionElement.querySelector(`#sourceOrigine${index}`).value;
+        const auteur = questionElement.querySelector(`#auteur${index}`).value;
+
+        // Construction de l'objet question
+        questions.push({
+          niveau: parseInt(niveau.value), // Convertir en entier
+          question: {
+            énoncé: enonce,
+            indice: indice,
+            commentaire: commentaireQuestion
+          },
+          réponse: {
+            réponse: reponse,
+            explication: explication,
+            commentaire: commentaireReponse,
+            source: sourceReponse
+          },
+          origine: {
+            source: sourceOrigine,
+            auteur: auteur
+          }
+        });
+      });
+
+      // Récupération des champs principaux
+      const nomSujet = document.querySelector('#nom').value.trim();
+      if (!nomSujet) {
+        alert("Le champ 'Nom' est requis.");
+        return;
+      }
+
+      const description = document.querySelector('#description').value;
+
+      // Construction de l'objet JSON final
+      const jsonResult = {
+        nom: nomSujet,
+        description: description,
+        questions: questions
+      };
+
+      // Génération du fichier JSON
+      const jsonString = JSON.stringify(jsonResult, null, 2);
+      const blob = new Blob([jsonString], { type: 'application/json' });
+
+      // Formatage du nom du fichier
+      const fileName = `${nomSujet.toLowerCase().replace(/\s+/g, '_')}.json`;
+
+      // Téléchargement automatique
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = fileName;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink); // Nettoyage
     }
 
-    // Récupération des autres champs
-    const enonce = questionElement.querySelector(`#enonce${index}`).value;
-    const indice = questionElement.querySelector(`#indice${index}`).value;
-    const commentaireQuestion = questionElement.querySelector(`#commentaireQuestion${index}`).value;
 
-    const reponse = questionElement.querySelector(`#reponse${index}`).value;
-    const explication = questionElement.querySelector(`#explication${index}`).value;
-    const commentaireReponse = questionElement.querySelector(`#commentaireReponse${index}`).value;
-    const sourceReponse = questionElement.querySelector(`#sourceReponse${index}`).value;
-
-    const sourceOrigine = questionElement.querySelector(`#sourceOrigine${index}`).value;
-    const auteur = questionElement.querySelector(`#auteur${index}`).value;
-
-    // Construction de l'objet question
-    questions.push({
-      niveau: parseInt(niveau.value), // Convertir en entier
-      question: {
-        énoncé: enonce,
-        indice: indice,
-        commentaire: commentaireQuestion
-      },
-      réponse: {
-        réponse: reponse,
-        explication: explication,
-        commentaire: commentaireReponse,
-        source: sourceReponse
-      },
-      origine: {
-        source: sourceOrigine,
-        auteur: auteur
-      }
-    });
-  });
-
-  // Récupération des champs principaux
-  const nomSujet = document.querySelector('#nom').value.trim();
-  if (!nomSujet) {
-    alert("Le champ 'Nom' est requis.");
-    return;
-  }
-
-  const description = document.querySelector('#description').value;
-
-  // Construction de l'objet JSON final
-  const jsonResult = {
-    nom: nomSujet,
-    description: description,
-    questions: questions
-  };
-
-  // Génération du fichier JSON
-  const jsonString = JSON.stringify(jsonResult, null, 2);
-  const blob = new Blob([jsonString], { type: 'application/json' });
-
-  // Formatage du nom du fichier
-  const fileName = `${nomSujet.toLowerCase().replace(/\s+/g, '_')}.json`;
-
-  // Téléchargement automatique
-  const downloadLink = document.createElement('a');
-  downloadLink.href = URL.createObjectURL(blob);
-  downloadLink.download = fileName;
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink); // Nettoyage
-}
-
-  
     function toggleQuestion(button) {
       const questionDetails = button.nextElementSibling;
       questionDetails.style.display =
         questionDetails.style.display === 'none' ? 'block' : 'none';
     }
   </script>
-   
+
 </body>
+
 </html>
