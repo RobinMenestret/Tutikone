@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créateur de JSON</title>
+  <link rel="stylesheet" href="nouveauSujet.css">
+</head>
+<body>
+  <h1>Création de JSON via Questionnaire</h1>
+  <form id="jsonForm">
+    <label for="nom">Nom :</label><br>
+    <input type="text" id="nom" name="nom" required><br><br>
+
+    <label for="description">Description :</label><br>
+    <textarea id="description" name="description"></textarea><br><br>
+
+    <div id="questionsContainer">
+      <h3>Questions :</h3>
+      <button type="button" onclick="addQuestion()">Ajouter une question</button>
+    </div><br>
+
+    <button type="button" onclick="generateJSON()">Générer le JSON</button>
+  </form>
+
+  <a id="downloadLink" style="display: none;">Télécharger le JSON</a>
+
+  <script>
+    function addQuestion() {
+      const questionIndex = document.querySelectorAll('.question').length;
+      const questionDiv = document.createElement('div');
+      questionDiv.classList.add('question');
+      questionDiv.innerHTML = `
+        <h4 ondblclick="toggleQuestion(this)">Question ${questionIndex + 1}</h4>
+        <div class="question-details">
+          <label for="niveau${questionIndex}">Niveau <span class="required">*</span> :</label>
+          <div class="niveau-options">
+          ${Array.from({ length: 10 }, (_, i) => `
+          <input type="radio" id="niveau${questionIndex}_${i + 1}" name="niveau${questionIndex}" value="${i + 1}" required>
+          <label for="niveau${questionIndex}_${i + 1}">${i + 1}</label>
+          `).join('')}
+          </div>
+          <br>
+          <label for="enonce${questionIndex}">Énoncé <span class="required">*</span> :</label>
+          <input type="text" id="enonce${questionIndex}" name="enonce${questionIndex}" required><br>
+  
+          <label for="indice${questionIndex}">Indice :</label>
+          <input type="text" id="indice${questionIndex}" name="indice${questionIndex}"><br>
+  
+          <label for="commentaireQuestion${questionIndex}">Commentaire :</label>
+          <input type="text" id="commentaireQuestion${questionIndex}" name="commentaireQuestion${questionIndex}"><br>
+  
+          <label for="reponse${questionIndex}">Réponse <span class="required">*</span> :</label>
+          <input type="text" id="reponse${questionIndex}" name="reponse${questionIndex}" required><br>
+  
+          <label for="explication${questionIndex}">Explication :</label>
+          <input type="text" id="explication${questionIndex}" name="explication${questionIndex}"><br>
+  
+          <label for="commentaireReponse${questionIndex}">Commentaire :</label>
+          <input type="text" id="commentaireReponse${questionIndex}" name="commentaireReponse${questionIndex}"><br>
+  
+          <label for="sourceReponse${questionIndex}">Source :</label>
+          <input type="text" id="sourceReponse${questionIndex}" name="sourceReponse${questionIndex}"><br>
+  
+          <label for="sourceOrigine${questionIndex}">Source origine :</label>
+          <input type="text" id="sourceOrigine${questionIndex}" name="sourceOrigine${questionIndex}"><br>
+  
+          <label for="auteur${questionIndex}">Auteur :</label>
+          <input type="text" id="auteur${questionIndex}" name="auteur${questionIndex}"><br><br>
+        </div>
+      `;
+      questionsContainer.appendChild(questionDiv);
+    }
+    function generateJSON() {
+  const questions = [];
+  const questionElements = document.querySelectorAll('.question');
+
+  questionElements.forEach((questionElement, index) => {
+    // Récupération du niveau sélectionné
+    const niveau = questionElement.querySelector(`input[name="niveau${index}"]:checked`);
+    if (!niveau) {
+      alert(`Veuillez sélectionner un niveau pour la question ${index + 1}.`);
+      return;
+    }
+
+    // Récupération des autres champs
+    const enonce = questionElement.querySelector(`#enonce${index}`).value;
+    const indice = questionElement.querySelector(`#indice${index}`).value;
+    const commentaireQuestion = questionElement.querySelector(`#commentaireQuestion${index}`).value;
+
+    const reponse = questionElement.querySelector(`#reponse${index}`).value;
+    const explication = questionElement.querySelector(`#explication${index}`).value;
+    const commentaireReponse = questionElement.querySelector(`#commentaireReponse${index}`).value;
+    const sourceReponse = questionElement.querySelector(`#sourceReponse${index}`).value;
+
+    const sourceOrigine = questionElement.querySelector(`#sourceOrigine${index}`).value;
+    const auteur = questionElement.querySelector(`#auteur${index}`).value;
+
+    // Construction de l'objet question
+    questions.push({
+      niveau: parseInt(niveau.value), // Convertir en entier
+      question: {
+        énoncé: enonce,
+        indice: indice,
+        commentaire: commentaireQuestion
+      },
+      réponse: {
+        réponse: reponse,
+        explication: explication,
+        commentaire: commentaireReponse,
+        source: sourceReponse
+      },
+      origine: {
+        source: sourceOrigine,
+        auteur: auteur
+      }
+    });
+  });
+
+  // Récupération des champs principaux
+  const nomSujet = document.querySelector('#nom').value.trim();
+  if (!nomSujet) {
+    alert("Le champ 'Nom' est requis.");
+    return;
+  }
+
+  const description = document.querySelector('#description').value;
+
+  // Construction de l'objet JSON final
+  const jsonResult = {
+    nom: nomSujet,
+    description: description,
+    questions: questions
+  };
+
+  // Génération du fichier JSON
+  const jsonString = JSON.stringify(jsonResult, null, 2);
+  const blob = new Blob([jsonString], { type: 'application/json' });
+
+  // Formatage du nom du fichier
+  const fileName = `${nomSujet.toLowerCase().replace(/\s+/g, '_')}.json`;
+
+  // Téléchargement automatique
+  const downloadLink = document.createElement('a');
+  downloadLink.href = URL.createObjectURL(blob);
+  downloadLink.download = fileName;
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink); // Nettoyage
+}
+
+  
+    function toggleQuestion(button) {
+      const questionDetails = button.nextElementSibling;
+      questionDetails.style.display =
+        questionDetails.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+   
+</body>
+</html>

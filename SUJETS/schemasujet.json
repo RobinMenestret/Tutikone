@@ -15,7 +15,9 @@
             "type": "object",
             "properties": {
               "niveau": {
-                "type": "integer"
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
               },
               "question": {
                 "type": "object",
