@@ -1,0 +1,24 @@
+{
+    "$schema": "./schemasujet.json",
+    "nom" : "Le tore",
+    "description" : "Ce sujet regroupe un ensemble de questions qui parlent du tore",
+    "questions" : [
+        {
+            "niveau" : 1,
+            "question" : {
+                "énoncé":"Lequel de ces objets à la forme d’un tore : une chaise, un sapin de Noël ou une bouée ?",
+                "indice":"",
+                "commentaire": "Cette question est évidente pour n'importe qui qui à déjà entendu parler de tore"
+            },
+            "réponse" : {
+                "réponse" : "une bouée",
+                "explication" : "Un tore est une surface géometrique qui ressemble à une bouée, selon les paramètres que l'on choisit, il peut ressembler plutot a un anneau ou plutot à un donut.",
+                "commentaire" : ""
+            },
+            "origine" : {
+                "source" : "",
+                "auteur" : "Robin Menestret"
+            }
+        }
+    ]
+}

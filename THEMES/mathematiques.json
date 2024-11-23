@@ -1,0 +1,8 @@
+{
+    "$schema": "./schematheme.json",
+    "nom" : "Mathématiques",
+    "description" : "Ce Thème regroupe l'ensemble des catégories liées de près ou de loin aux mathématiques",
+    "categories" : [
+        "Topologie"
+    ]
+}

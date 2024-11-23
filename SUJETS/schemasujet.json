@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "nom": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "questions": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "niveau": {
+                "type": "integer"
+              },
+              "question": {
+                "type": "object",
+                "properties": {
+                  "énoncé": {
+                    "type": "string"
+                  },
+                  "indice": {
+                    "type": "string"
+                  },
+                  "commentaire": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "énoncé"
+                ]
+              },
+              "réponse": {
+                "type": "object",
+                "properties": {
+                  "réponse": {
+                    "type": "string"
+                  },
+                  "explication": {
+                    "type": "string"
+                  },
+                  "commentaire": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "réponse"
+                ]
+              },
+              "origine": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string"
+                  },
+                  "auteur": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": [
+              "niveau",
+              "question",
+              "réponse",
+              "origine"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "nom",
+      "questions"
+    ]
+  }
