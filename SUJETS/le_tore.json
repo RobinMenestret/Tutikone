@@ -139,7 +139,7 @@
             }
         },
         {
-            "niveau" : 2,
+            "niveau" : 10,
             "question" : {
                 "énoncé":"Parmi les différents modèles mathématiques cherchant une description géométrique de l’univers, il existe celle d’un tore tridimensionnel. Cette description n’est pourtant pas la plus répandue. Pour quelle raison ?"
             },

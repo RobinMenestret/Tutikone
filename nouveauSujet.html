@@ -13,6 +13,7 @@
   <div align="center">
     <input type="file" id="import-json" accept="application/json">
     <button type="button" onclick="importJSON()">Importer le JSON</button>
+    <button id="verifierBtn" onclick="colorValidationButton()">Vérifier la complétude</button>
   </div>
   <form id="jsonForm">
     <label for="nom">Nom :</label><br>
@@ -32,7 +33,8 @@
   <a id="downloadLink" style="display: none;">Télécharger le JSON</a>
 
   <script>
-    function importJSON() {
+
+    function loadJSON() {
       const inputFile = document.querySelector('#import-json');
       const file = inputFile.files[0];
 
@@ -40,12 +42,15 @@
         alert("Veuillez sélectionner un fichier JSON.");
         return;
       }
+      return file
 
+    }
+    function importJSON() {
       const reader = new FileReader();
+      const file = this.loadJSON()
       reader.onload = function (event) {
         try {
           const importedData = JSON.parse(event.target.result);
-          console.log(importedData);
 
           // Remplir le formulaire
           document.querySelector('#nom').value = importedData.nom || '';
@@ -75,6 +80,64 @@
       };
 
       reader.readAsText(file);
+    }
+    function verifierNiveaux() {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        const file = this.loadJSON()
+        reader.onload = function (event) {
+          try {
+            const importedData = JSON.parse(event.target.result);
+            console.log(importedData);
+
+            const liste = importedData.questions;
+            // Créé un Set pour garder une trace des niveaux trouvés
+            const niveauxTrouves = new Set();
+
+            // Parcourt la liste et ajoute chaque niveau trouvé dans le Set
+            for (const objet of liste) {
+              if (objet.niveau >= 1 && objet.niveau <= 10) {
+                niveauxTrouves.add(objet.niveau);
+              }
+            }
+            console.log(niveauxTrouves)
+            let valid = true;
+            // Vérifie si le Set contient tous les niveaux de 1 à 10
+            for (let i = 1; i <= 10; i++) {
+              if (!niveauxTrouves.has(i)) {
+                console.log('il manque le niveau ' + i)
+                valid = false; // Un niveau est manquant
+              }
+            }
+            if (valid) {
+              console.log('il ne manque aucun niveau !')
+            }
+            resolve(valid); // Tous les niveaux sont présents
+
+          } catch (error) {
+            alert("Erreur lors de l'importation du fichier JSON : " + error.message);
+          }
+        }
+        reader.readAsText(file);
+      })
+    }
+    function colorValidationButton() {
+      const button = document.getElementById("verifierBtn");
+      button.addEventListener("click", async () => {
+        const validate = await this.verifierNiveaux();
+        console.log(validate)
+        if (validate) {
+          button.style.backgroundColor = "green";
+          button.innerHTML = "Sujet complet !";
+        } else {
+          button.style.backgroundColor = "red";
+          button.innerHTML = "Sujet imcomplet !";
+        }
+        setTimeout(() => {
+          button.style.backgroundColor = "";// Réinitialise la couleur
+          button.innerHTML = "Vérifier la complétude"; // Réinitialiser la valeur du bouton
+        }, 2000);
+      });
     }
 
 
@@ -200,8 +263,6 @@
       downloadLink.click();
       document.body.removeChild(downloadLink); // Nettoyage
     }
-
-
     function toggleQuestion(button) {
       const questionDetails = button.nextElementSibling;
       questionDetails.style.display =

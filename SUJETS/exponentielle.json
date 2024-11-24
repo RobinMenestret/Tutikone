@@ -1,0 +1,132 @@
+{
+  "nom": "Exponentielle",
+  "description": "",
+  "questions": [
+    {
+      "niveau": 1,
+      "question": {
+        "énoncé": "Quelle lettre est généralement utilisée pour représenter l’exponentielle ?",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "e",
+        "explication": "",
+        "commentaire": "",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    },
+    {
+      "niveau": 2,
+      "question": {
+        "énoncé": "Quelles est la valeur de e (à 3 chiffres après la virgule) ?",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "2,718",
+        "explication": "",
+        "commentaire": "",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    },
+    {
+      "niveau": 3,
+      "question": {
+        "énoncé": "Quelle est la dérivée de la fonction exponentielle ?",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "la fonction exponentielle elle-même",
+        "explication": "",
+        "commentaire": "",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    },
+    {
+      "niveau": 4,
+      "question": {
+        "énoncé": "Quelle est la fonction réciproque de l’exponentielle ?",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "Le logarithme népérien",
+        "explication": "",
+        "commentaire": "",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    },
+    {
+      "niveau": 5,
+      "question": {
+        "énoncé": "Donner la série entière permettant de définir la fonction exponentielle.",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "$exp(x)=\\\\sum_{n=0}^{+\\\\infty}\\\\frac{x^n}{n!}$",
+        "explication": "",
+        "commentaire": "",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    },
+    {
+      "niveau": 6,
+      "question": {
+        "énoncé": "Quelle formule, considérée par beaucoup comme la plus belle formule des maths, lie entre eux les termes : $ e, \\\\pi, i, 0 et 1$ et les opérations d'addition, de multiplication et d’exponentiation ?",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "$e^{i\\\\pi}+1=0$",
+        "explication": "",
+        "commentaire": "",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    },
+    {
+      "niveau": 7,
+      "question": {
+        "énoncé": "Quelle identité permet de relier la fonction exponentielle et la fonction cosinus ?",
+        "indice": "",
+        "commentaire": ""
+      },
+      "réponse": {
+        "réponse": "$ cos(x) = \\\\frac{e^{i\\\\pi}+e^{-i\\\\pi}}{2} $",
+        "explication": "",
+        "commentaire": "La formule d'Euler est aussi acceptée.",
+        "source": ""
+      },
+      "origine": {
+        "source": "",
+        "auteur": "Robin Menestret"
+      }
+    }
+  ]
+}

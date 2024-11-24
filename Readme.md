@@ -3,10 +3,6 @@
 Bienvenu sur le git de Tutikone ! L'objectif est simple, créer tous ensemble une infinité de jeux de quiz spécialisés !
 L'objectif est de créer des ensembles de questions/réponses pour chaque sujet. Les sujets sont chacuns liés à une ou plusieurs catégories. Les catégories sont elles même regroupées par thèmes.
 
-## Exemple
-
-TODO : trouver un exemple.
-
 # Le fonctionnement 
 
 Voici une liste de principes qui peuvent évoluer :
@@ -18,5 +14,10 @@ Voici une liste de principes qui peuvent évoluer :
  # Get Started
 
 1. télécharger git si ce n'est pas déjà fait.
-2. cloner le git sur votre ordinateur avec ```git clone https://github.com/RobinMenestret/Tutikone.git```
+2. cloner le git sur votre ordinateur avec 
+
+    ```git clone https://github.com/RobinMenestret/Tutikone.git```
+
 3. Lancer le fichier ```nouveauSujet.html``` dans votre navigateur.
+4. pour créer un sujet, donnez-lui un nom et ajoutez des questions, téléchargez-le et ajouter-le dans le perpertoire ```TUTIKONE/SUJETS```. 
+5. Vous pouvez éditer un sujet : importez-le, modifiez-le sur l'interface, téléchargez-le puis remplacer-le dans le repertoire ```TUTIKONE/SUJETS```
