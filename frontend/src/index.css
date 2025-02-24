@@ -1,0 +1,221 @@
+/* GLOBAL */
+
+/* Importation d'une police plus élégante */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  line-height: 1.6;
+  padding: 0;
+}
+.module {
+  margin : 20px;
+  text-align: center;
+}
+
+h1, h2 {
+  color: #1d4ed8; /* Couleur bleue pour les titres */
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+
+.settings, .scoreboard {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+label {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+  display: block;
+}
+.forgot-password {
+  font-size: 0.8rem;
+  color: #555;
+  display: block;
+}
+.forgot-password:hover {
+  color: #1d4ed8;
+}
+input[type="text"], input[type="email"], input[type="password"] {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+input[type="email"], input[type="password"] {
+  width: 300px;
+}
+.email-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+  border-color: #1d4ed8;
+}
+
+button, .button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none; /* Ajoutez cette ligne pour supprimer la décoration de texte */
+  display: inline-block; /* Ajoutez cette ligne pour que le lien soit affiché comme un bloc en ligne */
+  text-align: center; /* Ajoutez cette ligne pour centrer le texte */
+  margin-top: 20px;
+  margin : 10px;
+}
+
+button:hover, .button:hover {
+  background-color: #2563eb;
+}
+
+button:disabled, .button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.scoreboard p {
+  font-size: 1.25rem;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .settings, .scoreboard {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* LOGIN */
+
+
+.login {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  width: 300px;
+}
+/* REGISTER */
+
+.register {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  width: 300px;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+/* SETTINGS AND SCOREBOARD */
+
+.settings, .scoreboard {
+  padding: 20px;
+  text-align: center;
+}
+
+
+.settings label, .scoreboard p {
+  display: block;
+  margin: 10px 0;
+}
+
+input[type="text"], input[type="email"] {
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+.invalid-login-label {
+  color : red;
+  font-style: italic;
+}
+.scoreboard {
+  margin-top: 40px;
+}
+
+.scoreboard h2 {
+  margin-bottom: 20px;
+}
+
+.game-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.game-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-id,
+.game-value,
+.game-date,
+.game-word {
+  margin-right: 10px;
+}
+
+.invalid-login-label {
+  color : orange;
+  font-style: italic;
+}
