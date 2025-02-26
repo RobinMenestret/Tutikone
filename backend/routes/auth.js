@@ -18,10 +18,11 @@ const generateTokenAndRespond = (user, res) => {
 // Inscription
 router.post('/register', async (req, res) => {
   const { email, username, password } = req.body;
-
+  console.log("Inscription : ", email, username, password)
   try {
     // Vérifier si l'utilisateur existe déjà
     const userExists = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+
     if (userExists.rows.length > 0) {
       console.log("Email déjà utilisé")
       return res.status(400).json({ error: 'Email déjà utilisé' });

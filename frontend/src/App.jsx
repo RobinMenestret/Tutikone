@@ -11,6 +11,7 @@ import Callback from './pages/Callback';
 import EmailConfirmation from './pages/EmailConfirmation';
 import ResetPassword from './pages/ResetPassword';
 import QuestionForm from './pages/QuestionForm';
+import ContributePage from './pages/ContributePage';
 
 const Layout = () => (
   <>
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: '/reset-password', element: <ResetPassword /> },
       { path: '/reset-password/:token', element: <ResetPassword /> },
       { path: '/question-form', element: <QuestionForm /> },
+      { path: '/contribute', element: <ContributePage /> },
     ],
   },
 ]);

@@ -1,0 +1,70 @@
+@startuml
+entity "users" {
+    + UUID id
+    --
+    email: VARCHAR(255)
+    username: VARCHAR(50)
+    password: VARCHAR(255)
+    email_verified: BOOLEAN
+    two_factor_enabled: BOOLEAN
+    reset_token: VARCHAR(255)
+    reset_token_expires: BIGINT
+    is_google_account: BOOLEAN
+}
+
+entity "themes" {
+    + SERIAL id
+    --
+    name: VARCHAR(255)
+    description: TEXT
+}
+
+entity "categories" {
+    + SERIAL id
+    --
+    name: VARCHAR(255)
+    description: TEXT
+    theme_id: INTEGER
+}
+
+entity "subjects" {
+    + SERIAL id
+    --
+    name: VARCHAR(255)
+    description: TEXT
+}
+
+entity "questions" {
+    + SERIAL id
+    --
+    subject_id: INTEGER
+    level: FLOAT
+    statement: TEXT
+    hint: TEXT
+    question_comment: TEXT
+    answer: TEXT
+    explanation: TEXT
+    answer_comment: TEXT
+    answer_source: TEXT
+    origin_source: TEXT
+    author_id: UUID
+}
+
+entity "subject_categories" {
+    + INTEGER subject_id
+    + INTEGER category_id
+}
+
+entity "theme_categories" {
+    + INTEGER theme_id
+    + INTEGER category_id
+}
+
+users ||--o{ questions: "author_id"
+themes ||--o{ categories: "theme_id"
+subjects ||--o{ questions: "subject_id"
+subjects ||--o{ subject_categories: "subject_id"
+categories ||--o{ subject_categories: "category_id"
+themes ||--o{ theme_categories: "theme_id"
+categories ||--o{ theme_categories: "category_id"
+@enduml

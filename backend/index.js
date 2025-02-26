@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/game', require('./routes/game'));
+app.use('/api/modifydb', require('./routes/modifydb'));
 
 
 // Route de test pour vérifier que le serveur répond
