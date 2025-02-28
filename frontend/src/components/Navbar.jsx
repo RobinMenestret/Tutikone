@@ -23,6 +23,7 @@ function Navbar() {
       <ul className="navbar-list">
         <li className="navbar-item"><Link to="/">Home</Link></li>
         <li className="navbar-item"><Link to="/contribute">Contribuer</Link></li>
+        <li className="navbar-item"><Link to="/browse">Naviguer</Link></li>
         {user && <li className="navbar-item"><Link to="/settings">Settings</Link></li>}
         {!user && <li className="navbar-item"><Link to="/login">Sign In</Link></li>}
         {!user && <li className="navbar-item"><Link to="/register">Sign Up</Link></li>}

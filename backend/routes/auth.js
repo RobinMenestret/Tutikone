@@ -21,7 +21,15 @@ router.post('/register', async (req, res) => {
   console.log("Inscription : ", email, username, password)
   try {
     // Vérifier si l'utilisateur existe déjà
-    const userExists = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    console.log("Vérification de l'existence de l'utilisateur");
+    let userExists;
+    try {
+      userExists = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+      console.log("Résultat de la requête : ", userExists);
+    } catch (dbError) {
+      console.error('Erreur lors de la requête à la base de données :', dbError);
+      return res.status(500).json({ error: 'Erreur lors de la requête à la base de données' });
+    }
 
     if (userExists.rows.length > 0) {
       console.log("Email déjà utilisé")
@@ -49,6 +57,7 @@ router.post('/register', async (req, res) => {
     res.status(201).json({ message: 'Utilisateur créé. Veuillez confirmer votre email.' });
 
   } catch (error) {
+    console.error("Erreur lors de l'inscription :", error);
     res.status(500).json({ error: 'Erreur lors de l\'inscription' });
   }
 });

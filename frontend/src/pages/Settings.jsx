@@ -32,19 +32,12 @@ const Settings = () => {
           setEmailVerified(response.data.email_verified);
           setIsGoogleAccount(response.data.is_google_account);
           setUser(response.data); // Mettre à jour le userContext
-
-          // Requête pour récupérer les jeux de l'utilisateur
-          return axios.get(API_URL + '/api/game', {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            }
-          });
-        })
-        .then(response => {
-          setGames(response.data); // Mettre à jour l'état des jeux
         })
         .catch(error => {
           console.error("Error fetching user data or games", error);
+          localStorage.removeItem('token');
+          setUser(null);
+          navigate('/login');
         });
     } else {
       navigate('/login');

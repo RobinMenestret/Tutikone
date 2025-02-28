@@ -28,8 +28,12 @@ const AddTheme = () => {
         setName('');
         setDescription('');
       } catch (error) {
-        console.error('Error adding theme:', error.response ? error.response.data : error.message);
-        alert('Failed to add theme.');
+        if (error.response && error.response.status === 400 && error.response.data.error === 'Theme with the same name already exists') {
+          alert('A theme with the same name already exists.');
+        } else {
+          console.error('Error adding theme:', error.response ? error.response.data : error.message);
+          alert('Failed to add theme.');
+        }
       }
     } else {
       alert('You must be logged in to add a theme.');

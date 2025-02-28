@@ -30,6 +30,16 @@ router.get('/', authenticate, async (req, res) => {
   }
 });
 
+// Récupérer l'id de l'utilisateur
+router.get('/id', authenticate, async (req, res) => {
+  try {
+    res.json(req.userId);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching userid' });
+  }
+});
+
+
 // Modifier le nom d'utilisateur et l'état du 2FA
 router.put('/', authenticate, async (req, res) => {
   const { username, is2FAEnabled } = req.body;

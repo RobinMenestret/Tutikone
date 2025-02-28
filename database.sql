@@ -11,14 +11,14 @@ CREATE TABLE users (
     is_google_account BOOLEAN DEFAULT FALSE
 );
 
--- Create the themes table
+-- Crée la table 'themes'.
 CREATE TABLE themes (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT
 );
 
--- Create the categories table
+-- Crée la table 'categories'.
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -26,14 +26,15 @@ CREATE TABLE categories (
     theme_id INTEGER REFERENCES themes(id) ON DELETE CASCADE
 );
 
--- Create the subjects table
+-- Crée la table 'subjects'.
 CREATE TABLE subjects (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT
+    description TEXT,
+    user_id UUID REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Create the questions table
+-- Crée la table 'questions'.
 CREATE TABLE questions (
     id SERIAL PRIMARY KEY,
     subject_id INTEGER NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
@@ -49,16 +50,9 @@ CREATE TABLE questions (
     author_id UUID REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Create the subject_categories table for many-to-many relationship between subjects and categories
+-- Crée la table 'subject_categories' pour la relation plusieurs-à-plusieurs entre les sujets et les catégories.
 CREATE TABLE subject_categories (
     subject_id INTEGER NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
     category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     PRIMARY KEY (subject_id, category_id)
-);
-
--- Create the theme_categories table for many-to-many relationship between themes and categories
-CREATE TABLE theme_categories (
-    theme_id INTEGER NOT NULL REFERENCES themes(id) ON DELETE CASCADE,
-    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
-    PRIMARY KEY (theme_id, category_id)
 );
