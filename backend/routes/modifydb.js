@@ -30,6 +30,12 @@ router.post('/categories', async (req, res) => {
   const { name, description, theme_id } = req.body;
 
   try {
+    // Vérifier si une catégorie avec le même nom existe déjà (insensible à la casse)
+    const existingCategory = await db.query('SELECT * FROM categories WHERE LOWER(name) = LOWER($1)', [name]);
+    if (existingCategory.rows.length > 0) {
+      return res.status(400).json({ error: 'Category with the same name already exists' });
+    }
+
     const result = await db.query(
       'INSERT INTO categories (name, description, theme_id) VALUES ($1, $2, $3) RETURNING id',
       [name, description, theme_id]
@@ -44,7 +50,14 @@ router.post('/categories', async (req, res) => {
 // Route to add a new subject
 router.post('/subjects', async (req, res) => {
   const { name, description, user_id, category_ids } = req.body;
+
   try {
+    // Vérifier si un sujet avec le même nom existe déjà (insensible à la casse)
+    const existingSubject = await db.query('SELECT * FROM subjects WHERE LOWER(name) = LOWER($1)', [name]);
+    if (existingSubject.rows.length > 0) {
+      return res.status(400).json({ error: 'Subject with the same name already exists' });
+    }
+
     // Insérer le nouveau sujet
     const result = await db.query(
       'INSERT INTO subjects (name, description, user_id) VALUES ($1, $2, $3) RETURNING id',
@@ -76,6 +89,12 @@ router.post('/questions', async (req, res) => {
   const { subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source } = req.body;
 
   try {
+    // Vérifier si une question avec le même énoncé existe déjà (insensible à la casse)
+    const existingQuestion = await db.query('SELECT * FROM questions WHERE LOWER(statement) = LOWER($1)', [statement]);
+    if (existingQuestion.rows.length > 0) {
+      return res.status(400).json({ error: 'Question with the same statement already exists' });
+    }
+
     console.log("request : ", req.body);
     const result = await db.query(
       'INSERT INTO questions (subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id',

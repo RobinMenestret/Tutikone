@@ -19,18 +19,18 @@ const ContributePage = () => {
       case 'question':
         return <AddQuestion />;
       default:
-        return <p>Please select a module to contribute.</p>;
+        return <p>Selectionner le type d'objet à créer</p>;
     }
   };
 
   return (
     <div className="container">
-      <h1>Contribute to the Database</h1>
+      <h1>Contribuer à la base de donnée</h1>
       <div className="module-selection">
-        <button onClick={() => setSelectedModule('theme')}>Add Theme</button>
-        <button onClick={() => setSelectedModule('category')}>Add Category</button>
-        <button onClick={() => setSelectedModule('subject')}>Add Subject</button>
-        <button onClick={() => setSelectedModule('question')}>Add Question</button>
+        <button onClick={() => setSelectedModule('theme')}>Créer un thème</button>
+        <button onClick={() => setSelectedModule('category')}>Créer une catégorie</button>
+        <button onClick={() => setSelectedModule('subject')}>Créer un sujet</button>
+        <button onClick={() => setSelectedModule('question')}>Créer une question</button>
       </div>
       <div className="contribute-module">
         {renderModule()}

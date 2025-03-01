@@ -4,8 +4,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Settings from './pages/Settings';
-import Game from './pages/Game';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer'; 
 import { UserProvider } from './UserContext';
 import Callback from './pages/Callback';
 import EmailConfirmation from './pages/EmailConfirmation';
@@ -19,6 +19,7 @@ const Layout = () => (
     <div className="container">
       <Outlet />
     </div>
+    <Footer />
   </>
 );
 
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       { path: '/reset-password', element: <ResetPassword /> },
       { path: '/reset-password/:token', element: <ResetPassword /> },
       { path: '/contribute', element: <ContributePage /> },
-      { path: '/browse', element: <BrowseDatabase />}
+      { path: '/browse', element: <BrowseDatabase /> }
     ],
   },
 ]);

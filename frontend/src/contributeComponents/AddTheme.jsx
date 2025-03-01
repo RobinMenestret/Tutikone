@@ -4,6 +4,7 @@ import axios from 'axios';
 const AddTheme = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
@@ -29,11 +30,16 @@ const AddTheme = () => {
         setDescription('');
       } catch (error) {
         if (error.response && error.response.status === 400 && error.response.data.error === 'Theme with the same name already exists') {
-          alert('A theme with the same name already exists.');
+          setErrorMessage('A theme with the same name already exists.');
         } else {
           console.error('Error adding theme:', error.response ? error.response.data : error.message);
-          alert('Failed to add theme.');
+          setErrorMessage('Failed to add theme.');
         }
+
+        // Clear the error message after 2 seconds
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 2000);
       }
     } else {
       alert('You must be logged in to add a theme.');
@@ -43,7 +49,7 @@ const AddTheme = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Nom du thème :</label>
         <input
           type="text"
           id="name"
@@ -61,7 +67,8 @@ const AddTheme = () => {
           required
         ></textarea>
       </div>
-      <button type="submit">Add Theme</button>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <button type="submit">Créer le theme</button>
     </form>
   );
 };

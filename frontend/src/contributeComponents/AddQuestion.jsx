@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import './AddQuestion.css'; // Import the CSS file for styling
 
 const AddQuestion = () => {
   const [subjectId, setSubjectId] = useState('');
@@ -14,6 +15,8 @@ const AddQuestion = () => {
   const [originSource, setOriginSource] = useState('');
   const [subjects, setSubjects] = useState([]);
   const API_URL = process.env.REACT_APP_API_URL;
+  const sliderRef = useRef(null);
+  const labelRef = useRef(null);
 
   useEffect(() => {
     // Fetch subjects on component mount
@@ -29,6 +32,24 @@ const AddQuestion = () => {
 
     fetchSubjects();
   }, [API_URL]);
+
+  useEffect(() => {
+    // Update label position when level changes
+    const updateLabelPosition = () => {
+      if (sliderRef.current && labelRef.current) {
+        const sliderWidth = sliderRef.current.offsetWidth;
+        const thumbWidth = 25; // Width of the thumb
+        const max = sliderRef.current.max;
+        const min = sliderRef.current.min;
+        const value = sliderRef.current.value;
+        const percent = (value - min) / (max - min);
+        const offset = percent * (sliderWidth - thumbWidth) + thumbWidth / 2;
+        labelRef.current.style.left = `${offset}px`;
+      }
+    };
+
+    updateLabelPosition();
+  }, [level]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,16 +120,19 @@ const AddQuestion = () => {
       </div>
       <div>
         <label htmlFor="level">Niveau Supposé</label>
-        <input
-          type="range"
-          id="level"
-          min="1"
-          max="10"
-          value={level}
-          onChange={(e) => setLevel(e.target.value)}
-          required
-        />
-        <span>{level}</span>
+        <div className="slider-container" style={{ position: 'relative' }}>
+          <input
+            type="range"
+            id="level"
+            min="0"
+            max="10"
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+            required
+            ref={sliderRef}
+          />
+          <span className="slider-label" ref={labelRef}>{level}</span>
+        </div>
       </div>
       <div>
         <label htmlFor="statement">Question :</label>

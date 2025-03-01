@@ -90,3 +90,8 @@ select option:checked {
     background-color: var(--secondary-color);
     color: white;
 }
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+  }

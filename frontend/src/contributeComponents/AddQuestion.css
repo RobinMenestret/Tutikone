@@ -1,0 +1,38 @@
+/* Style the range input */
+input[type="range"] {
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 8px; /* Specified height */
+    background: white;
+    outline: none; /* Remove outline */
+    position: relative;
+  }
+  
+  
+  /* The slider handle (thumb) */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%; /* Rounded corners */
+    position: relative;
+    z-index: 2;
+  }
+  
+
+  /* Style the label */
+  .slider-label {
+    position: absolute;
+    left: 100%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    z-index: 2;
+    pointer-events: none; /* Prevent interaction */
+  }

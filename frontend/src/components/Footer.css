@@ -1,0 +1,30 @@
+@import url('@styles/graphic_chart.css');
+
+.footer {
+    background-color: var(--primary-color);
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: 0.9em;
+    color: var(--text-color);
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+    font-style: italic;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }

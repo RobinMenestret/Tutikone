@@ -6,6 +6,7 @@ const AddSubject = () => {
     const [description, setDescription] = useState('');
     const [categoryIds, setCategoryIds] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
     const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const AddSubject = () => {
                 }
             })
             .catch(error => console.error('Error fetching categories:', error));
-    }, []);
+    }, [API_URL]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,12 +31,23 @@ const AddSubject = () => {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 }
-              })
+              });
             console.log('User:', user_id.data);
             const response = await axios.post(API_URL + '/api/modifydb/subjects', { name, description, user_id: user_id.data, category_ids: categoryIds });
             console.log('Subject created:', response.data);
+            alert('Sujet ajouté !');
         } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setErrorMessage('Un sujet avec le même nom existe déjà.');
+            } else {
+                setErrorMessage('Erreur lors de la création du sujet.');
+            }
             console.error('Error creating subject:', error);
+
+            // Clear the error message after 2 seconds
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 2000);
         }
     };
 
@@ -53,7 +65,7 @@ const AddSubject = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Name:</label>
+                <label>Nom du sujet :</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div>
@@ -61,14 +73,15 @@ const AddSubject = () => {
                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
             </div>
             <div>
-                <label>Categories:</label>
+                <label>Categories associées :</label>
                 <select multiple value={categoryIds} onChange={handleCategoryChange} required>
                     {categories.map(category => (
                         <option key={category.id} value={category.id}>{category.name}</option>
                     ))}
                 </select>
             </div>
-            <button type="submit">Create Subject</button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <button type="submit">Créer le sujet</button>
         </form>
     );
 };

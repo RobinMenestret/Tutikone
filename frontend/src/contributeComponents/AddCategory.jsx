@@ -6,6 +6,7 @@ const AddCategory = () => {
     const [description, setDescription] = useState('');
     const [themeId, setThemeId] = useState('');
     const [themes, setThemes] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
     const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -19,22 +20,34 @@ const AddCategory = () => {
                 }
             })
             .catch(error => console.error('Error fetching themes:', error));
-    }, []);
+    }, [API_URL]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMessage(''); // Clear any previous error message
         try {
             const response = await axios.post(API_URL + '/api/modifydb/categories', { name, description, theme_id: themeId });
             console.log('Category created:', response.data);
+            alert('Category added successfully!');
         } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setErrorMessage('Une catégorie avec le même nom existe déjà.');
+            } else {
+                setErrorMessage('Erreur lors de la création de la catégorie.');
+            }
             console.error('Error creating category:', error);
+
+            // Clear the error message after 2 seconds
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 2000);
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-input">
-                <label>Catégorie</label>
+                <label>Nom de la catégorie</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div className="form-input">
@@ -42,7 +55,7 @@ const AddCategory = () => {
                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
             </div>
             <div className="form-input">
-                <label>Thème</label>
+                <label>Thème associé</label>
                 <select value={themeId} onChange={(e) => setThemeId(e.target.value)} required>
                     <option value="">Choisir un thème</option>
                     {themes.map(theme => (
@@ -50,8 +63,8 @@ const AddCategory = () => {
                     ))}
                 </select>
             </div>
-            <button type="submit">Créer la categorie
-            </button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <button type="submit">Créer la catégorie</button>
         </form>
     );
 };
