@@ -1,6 +1,7 @@
 :root {
   --primary-color: #FF6B35; /* Orange vif, énergique et accrocheur */
   --secondary-color: #ff8f67; /* Bleu intense pour un contraste dynamique */
+  --tertiary-color: #f5bf9b; /* Jaune doré pour une touche de lumière */
   --background-color: #FDF0D5; /* Beige clair, chaleureux et lumineux */
   --text-color: #1B1B1B; /* Noir profond pour une lisibilité optimale */
   --border-color: #e93e00; /* Rouge vif pour structurer sans être trop agressif */

@@ -139,34 +139,52 @@ const BrowseDatabase = () => {
                 <td><strong>Énoncé:</strong></td>
                 <td>{selectedQuestion.statement}</td>
               </tr>
-              <tr>
-                <td><strong>Indice:</strong></td>
-                <td>{selectedQuestion.hint}</td>
-              </tr>
-              <tr>
-                <td><strong>Commentaire de la question:</strong></td>
-                <td>{selectedQuestion.question_comment}</td>
-              </tr>
+              {selectedQuestion.hint && (
+                <tr>
+                  <td><strong>Indice:</strong></td>
+                  <td>{selectedQuestion.hint}</td>
+                </tr>
+              )}
+              {selectedQuestion.question_comment && (
+                <tr>
+                  <td><strong>Commentaire de la question:</strong></td>
+                  <td>{selectedQuestion.question_comment}</td>
+                </tr>
+              )}
+              {selectedQuestion.level && (
+                <tr>
+                  <td><strong>Niveau:</strong></td>
+                  <td>{selectedQuestion.level}</td>
+                </tr>
+              )}
               <tr>
                 <td><strong>Réponse:</strong></td>
                 <td>{selectedQuestion.answer}</td>
               </tr>
+              {selectedQuestion.explanation && (
               <tr>
                 <td><strong>Explication:</strong></td>
                 <td>{selectedQuestion.explanation}</td>
               </tr>
+              )}
+              {selectedQuestion.answer_comment && (
               <tr>
                 <td><strong>Commentaire de réponse:</strong></td>
                 <td>{selectedQuestion.answer_comment}</td>
               </tr>
+              )}
+              {selectedQuestion.answer_source && (
               <tr>
                 <td><strong>Source de la réponse:</strong></td>
                 <td><a href={selectedQuestion.answer_source} target="_blank" rel="noopener noreferrer">{selectedQuestion.answer_source}</a></td>
               </tr>
+              )}
+              {selectedQuestion.origin_source && (
               <tr>
                 <td><strong>Source de la question:</strong></td>
                 <td><a href={selectedQuestion.origin_source} target="_blank" rel="noopener noreferrer">{selectedQuestion.origin_source}</a></td>
               </tr>
+              )}
             </tbody>
           </table>
         </div>
