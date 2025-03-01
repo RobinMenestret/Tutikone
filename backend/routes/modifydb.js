@@ -76,6 +76,7 @@ router.post('/questions', async (req, res) => {
   const { subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source } = req.body;
 
   try {
+    console.log("request : ", req.body);
     const result = await db.query(
       'INSERT INTO questions (subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id',
       [subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source]

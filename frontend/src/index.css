@@ -1,4 +1,5 @@
 /* GLOBAL */
+@import url('@styles/graphic_chart.css');
 
 /* Importation d'une police plus élégante */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -11,22 +12,22 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f0f4f8;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
   line-height: 1.6;
   padding: 0;
 }
+
 .module {
-  margin : 20px;
+  margin: 20px;
   text-align: center;
 }
 
 h1, h2 {
-  color: #1d4ed8; /* Couleur bleue pour les titres */
+  color: var(--primary-color); /* Couleur bleue pour les titres */
   font-weight: 700;
   margin-bottom: 15px;
 }
-
 
 .settings, .scoreboard {
   background-color: #ffffff;
@@ -41,18 +42,21 @@ h1, h2 {
 label {
   font-weight: 500;
   font-size: 1rem;
-  color: #555;
+  color: var(--text-color);
   margin-bottom: 10px;
   display: block;
 }
+
 .forgot-password {
   font-size: 0.8rem;
-  color: #555;
+  color: var(--text-color);
   display: block;
 }
+
 .forgot-password:hover {
-  color: #1d4ed8;
+  color: var(--primary-color);
 }
+
 input[type="text"], input[type="email"], input[type="password"] {
   padding: 12px;
   font-size: 1rem;
@@ -62,23 +66,26 @@ input[type="text"], input[type="email"], input[type="password"] {
   outline: none;
   transition: border-color 0.3s ease;
 }
+
 input[type="email"], input[type="password"] {
   width: 300px;
 }
+
 .email-line {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+
 input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-  border-color: #1d4ed8;
+  border-color: var(--primary-color);
 }
 
 button, .button {
   padding: 12px 25px;
   font-size: 1rem;
-  background-color: #1d4ed8;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 8px;
@@ -88,11 +95,11 @@ button, .button {
   display: inline-block; /* Ajoutez cette ligne pour que le lien soit affiché comme un bloc en ligne */
   text-align: center; /* Ajoutez cette ligne pour centrer le texte */
   margin-top: 20px;
-  margin : 10px;
+  margin: 10px;
 }
 
 button:hover, .button:hover {
-  background-color: #2563eb;
+  background-color: var(--primary-color);
 }
 
 button:disabled, .button:disabled {
@@ -102,7 +109,7 @@ button:disabled, .button:disabled {
 
 .scoreboard p {
   font-size: 1.25rem;
-  color: #444;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
@@ -121,7 +128,6 @@ button:disabled, .button:disabled {
 
 /* LOGIN */
 
-
 .login {
   text-align: center;
   margin-top: 50px;
@@ -133,6 +139,7 @@ button:disabled, .button:disabled {
   font-size: 16px;
   width: 300px;
 }
+
 /* REGISTER */
 
 .register {
@@ -149,14 +156,14 @@ button:disabled, .button:disabled {
 
 .button {
   padding: 10px 20px;
-  background-color: #1d4ed8;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: #2563eb;
+  background-color: var(--primary-color);
 }
 
 /* SETTINGS AND SCOREBOARD */
@@ -165,7 +172,6 @@ button:disabled, .button:disabled {
   padding: 20px;
   text-align: center;
 }
-
 
 .settings label, .scoreboard p {
   display: block;
@@ -179,12 +185,14 @@ input[type="text"], input[type="email"] {
 }
 
 button:hover {
-  background-color: #2563eb;
+  background-color: var(--secondary-color);
 }
+
 .invalid-login-label {
-  color : red;
+  color: red;
   font-style: italic;
 }
+
 .scoreboard {
   margin-top: 40px;
 }
@@ -216,6 +224,6 @@ button:hover {
 }
 
 .invalid-login-label {
-  color : orange;
+  color: orange;
   font-style: italic;
 }

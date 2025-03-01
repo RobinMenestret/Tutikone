@@ -76,9 +76,9 @@ const BrowseDatabase = () => {
 
   return (
     <div className="browse-database">
-      <h1>Browse Database</h1>
+      <h1>Parcourir la base de donnée</h1>
       <div className="section">
-        <h2>Select a Theme</h2>
+        <h2>Choix du thème</h2>
         <ul className="list">
           {themes.map((theme) => (
             <li key={theme.id} onClick={() => setSelectedTheme(theme)} className="list-item">
@@ -89,7 +89,7 @@ const BrowseDatabase = () => {
       </div>
       {selectedTheme && (
         <div className="section">
-          <h2>Select a Category</h2>
+          <h2>Choix de la catégorie</h2>
           <ul className="list">
             {categories.map((category) => (
               <li key={category.id} onClick={() => setSelectedCategory(category)} className="list-item">
@@ -101,7 +101,7 @@ const BrowseDatabase = () => {
       )}
       {selectedCategory && (
         <div className="section">
-          <h2>Select a Subject</h2>
+          <h2>Choix du sujet</h2>
           <ul className="list">
             {subjects.map((subject) => (
               <li key={subject.id} onClick={() => setSelectedSubject(subject)} className="list-item">
@@ -113,7 +113,7 @@ const BrowseDatabase = () => {
       )}
       {selectedSubject && (
         <div className="section">
-          <h2>Select a Question</h2>
+          <h2>Choix de la question</h2>
           <ul className="list">
             {questions.map((question) => (
               <li key={question.id} className="list-item">

@@ -1,5 +1,8 @@
-  .navbar {
-    background-color: #1d4ed8;
+
+@import url('@styles/graphic_chart.css');
+
+.navbar {
+    background-color: var(--primary-color);
     padding: 0;
   }
   
@@ -27,14 +30,14 @@
     padding: 20px;
   }
   .navbar-item p {
-    color: #1d4ed8;
+    color: var(--primary-color);
     text-decoration: none;
     display: block;
     padding: 10px;
     font-weight: bold;
   }
   .navbar-item a:hover {
-    background-color: #4f73d6;
+    background-color: var(--secondary-color);
   }
 
   .navbar-name {
@@ -44,6 +47,6 @@
     margin: 10px;
   }
   .navbar-name:hover {
-    background-color: #d7e1f5;
+    background-color: var(--background-color);
   }
   

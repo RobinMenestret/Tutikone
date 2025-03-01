@@ -33,24 +33,25 @@ const AddCategory = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>Name:</label>
+            <div className="form-input">
+                <label>Catégorie</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
-            <div>
-                <label>Description:</label>
+            <div className="form-input">
+                <label>Description</label>
                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
             </div>
-            <div>
-                <label>Theme:</label>
+            <div className="form-input">
+                <label>Thème</label>
                 <select value={themeId} onChange={(e) => setThemeId(e.target.value)} required>
-                    <option value="">Select a theme</option>
+                    <option value="">Choisir un thème</option>
                     {themes.map(theme => (
                         <option key={theme.id} value={theme.id}>{theme.name}</option>
                     ))}
                 </select>
             </div>
-            <button type="submit">Create Category</button>
+            <button type="submit">Créer la categorie
+            </button>
         </form>
     );
 };

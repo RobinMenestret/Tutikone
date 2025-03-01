@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AddQuestion.css'; // Import the CSS file
 
 const AddQuestion = () => {
   const [subjectId, setSubjectId] = useState('');
@@ -13,7 +12,6 @@ const AddQuestion = () => {
   const [answerComment, setAnswerComment] = useState('');
   const [answerSource, setAnswerSource] = useState('');
   const [originSource, setOriginSource] = useState('');
-  const [authorId, setAuthorId] = useState('');
   const [subjects, setSubjects] = useState([]);
   const API_URL = process.env.REACT_APP_API_URL;
 
@@ -23,6 +21,7 @@ const AddQuestion = () => {
       try {
         const response = await axios.get(`${API_URL}/api/browsedb/subjects`);
         setSubjects(response.data);
+        console.log('Subjects fetched:', response.data);
       } catch (error) {
         console.error('Error fetching subjects:', error);
       }
@@ -90,6 +89,7 @@ const AddQuestion = () => {
           onChange={(e) => setSubjectId(e.target.value)}
           required
         >
+          <option value="">Choix du sujet</option>
           {subjects.map((subject) => (
             <option key={subject.id} value={subject.id}>
               {subject.name}
@@ -98,7 +98,7 @@ const AddQuestion = () => {
         </select>
       </div>
       <div>
-        <label htmlFor="level">Niveau Supposé :</label>
+        <label htmlFor="level">Niveau Supposé</label>
         <input
           type="range"
           id="level"
@@ -112,69 +112,77 @@ const AddQuestion = () => {
       </div>
       <div>
         <label htmlFor="statement">Question :</label>
-        <textarea
+        <input
+          type="text"
           id="statement"
           value={statement}
           onChange={(e) => setStatement(e.target.value)}
           required
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="hint">Indice :</label>
-        <textarea
+        <input
+          type="text"
           id="hint"
           value={hint}
           onChange={(e) => setHint(e.target.value)}
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="questionComment">Commentaire de la question (précision à apporter) :</label>
-        <textarea
+        <input
+          type="text"
           id="questionComment"
           value={questionComment}
           onChange={(e) => setQuestionComment(e.target.value)}
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="answer">Réponse :</label>
-        <textarea
+        <input
+          type="text"
           id="answer"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
           required
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="explanation">Explication :</label>
-        <textarea
+        <input
+          type="text"
           id="explanation"
           value={explanation}
           onChange={(e) => setExplanation(e.target.value)}
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="answerComment">Commentaire de réponse (plusieurs réponses possible par exemple):</label>
-        <textarea
+        <input
+          type="text"
           id="answerComment"
           value={answerComment}
           onChange={(e) => setAnswerComment(e.target.value)}
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="answerSource">Source de la réponse :</label>
-        <textarea
+        <input
+          type="text"
           id="answerSource"
           value={answerSource}
           onChange={(e) => setAnswerSource(e.target.value)}
-        ></textarea>
+        />
       </div>
       <div>
         <label htmlFor="originSource">Source de la question :</label>
-        <textarea
+        <input
+          type="text"
           id="originSource"
           value={originSource}
           onChange={(e) => setOriginSource(e.target.value)}
-        ></textarea>
+        />
       </div>
       <button type="submit">Ajouter une question</button>
     </form>
