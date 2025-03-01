@@ -1,6 +1,6 @@
 # Tutikone
 
-Bienvenu sur le git de Tutikone ! L'objectif est simple, créer tous ensemble une infinité de jeux de quiz spécialisés !
+Bienvenue sur le git de Tutikone ! L'objectif est simple, créer tous ensemble une infinité de jeux de quiz spécialisés !
 L'objectif est de créer des ensembles de questions/réponses pour chaque sujet. Les sujets sont chacuns liés à une ou plusieurs catégories. Les catégories sont elles même regroupées par thèmes.
 Vous pouvez directement contribuer à la base de donnée sur https://tutikone.onrender.com.
 
