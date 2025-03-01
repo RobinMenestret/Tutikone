@@ -73,12 +73,12 @@ router.post('/subjects', async (req, res) => {
 
 // Route to add a new question
 router.post('/questions', async (req, res) => {
-  const { subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source, author_id } = req.body;
+  const { subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source } = req.body;
 
   try {
     const result = await db.query(
-      'INSERT INTO questions (subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source, author_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id',
-      [subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source, author_id]
+      'INSERT INTO questions (subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id',
+      [subject_id, level, statement, hint, question_comment, answer, explanation, answer_comment, answer_source, origin_source]
     );
     res.status(201).json({ id: result.rows[0].id });
   } catch (error) {

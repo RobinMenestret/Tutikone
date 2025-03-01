@@ -45,23 +45,30 @@ router.get('/subjects', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-// Route to get subject by category ID
+// Route to get all subjects associated with a specific category
 router.get('/categories/:categoryId/subjects', async (req, res) => {
     const { categoryId } = req.params;
+  
     try {
-        const result = await db.query('SELECT * FROM subjects WHERE category_id = $1', [categoryId]);
-        res.json(result.rows);
+      const result = await db.query(
+        `SELECT s.id, s.name, s.description, s.user_id
+         FROM subjects s
+         JOIN subject_categories sc ON s.id = sc.subject_id
+         WHERE sc.category_id = $1`,
+        [categoryId]
+      );
+      res.status(200).json(result.rows);
     } catch (error) {
-        console.error('Error fetching questions:', error);
-        res.status(500).json({ error: 'Internal server error' });
+      console.error('Error fetching subjects for category:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-});
+  });
 
 // Route to get questions by category ID
-router.get('/categories/:categoryId/questions', async (req, res) => {
-    const { categoryId } = req.params;
+router.get('/subject/:subjectId/questions', async (req, res) => {
+    const { subjectId } = req.params;
     try {
-        const result = await db.query('SELECT * FROM questions WHERE category_id = $1', [categoryId]);
+        const result = await db.query('SELECT * FROM questions WHERE subject_id = $1', [subjectId]);
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching questions:', error);

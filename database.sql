@@ -47,7 +47,6 @@ CREATE TABLE questions (
     answer_comment TEXT,
     answer_source TEXT,
     origin_source TEXT,
-    author_id UUID REFERENCES users(id) ON DELETE SET NULL
 );
 
 -- Crée la table 'subject_categories' pour la relation plusieurs-à-plusieurs entre les sujets et les catégories.

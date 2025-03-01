@@ -4,9 +4,9 @@ import './Home.css'; // Assurez-vous d'importer le fichier CSS
 function Home() {
   return (
     <div>
-      <div className="home">
+      <div className="module">
         <h1>Bienvenue sur Tutikone !</h1>
-        <p>La base de donnée open-source et collaborative des quiz experts</p>
+        <h3>La base de donnée open-source et collaborative des quiz experts</h3>
       </div>
     </div>
   );

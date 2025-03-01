@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './AddQuestion.css'; // Import the CSS file
 
 const AddQuestion = () => {
   const [subjectId, setSubjectId] = useState('');
-  const [level, setLevel] = useState('');
+  const [level, setLevel] = useState(1); // Default value set to 1
   const [statement, setStatement] = useState('');
   const [hint, setHint] = useState('');
   const [questionComment, setQuestionComment] = useState('');
@@ -13,21 +14,21 @@ const AddQuestion = () => {
   const [answerSource, setAnswerSource] = useState('');
   const [originSource, setOriginSource] = useState('');
   const [authorId, setAuthorId] = useState('');
-  const [categories, setCategories] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    // Fetch categories on component mount
-    const fetchCategories = async () => {
+    // Fetch subjects on component mount
+    const fetchSubjects = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/browsedb/categories`);
-        setCategories(response.data);
+        const response = await axios.get(`${API_URL}/api/browsedb/subjects`);
+        setSubjects(response.data);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching subjects:', error);
       }
     };
 
-    fetchCategories();
+    fetchSubjects();
   }, [API_URL]);
 
   const handleSubmit = async (e) => {
@@ -42,8 +43,7 @@ const AddQuestion = () => {
       explanation, 
       answer_comment: answerComment, 
       answer_source: answerSource, 
-      origin_source: originSource, 
-      author_id: authorId 
+      origin_source: originSource,  
     };
     const token = localStorage.getItem('token'); // Retrieve the token from local storage
 
@@ -62,7 +62,7 @@ const AddQuestion = () => {
         console.log('Question added:', response.data);
         alert('Question added successfully!');
         setSubjectId('');
-        setLevel('');
+        setLevel(1); // Reset to default value
         setStatement('');
         setHint('');
         setQuestionComment('');
@@ -71,7 +71,6 @@ const AddQuestion = () => {
         setAnswerComment('');
         setAnswerSource('');
         setOriginSource('');
-        setAuthorId('');
       } catch (error) {
         console.error('Error adding question:', error.response ? error.response.data : error.message);
         alert('Failed to add question.');
@@ -84,27 +83,35 @@ const AddQuestion = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="subjectId">Subject ID:</label>
-        <input
-          type="text"
+        <label htmlFor="subjectId">Sujets</label>
+        <select
           id="subjectId"
           value={subjectId}
           onChange={(e) => setSubjectId(e.target.value)}
           required
-        />
+        >
+          {subjects.map((subject) => (
+            <option key={subject.id} value={subject.id}>
+              {subject.name}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
-        <label htmlFor="level">Level:</label>
+        <label htmlFor="level">Niveau Supposé :</label>
         <input
-          type="text"
+          type="range"
           id="level"
+          min="1"
+          max="10"
           value={level}
           onChange={(e) => setLevel(e.target.value)}
           required
         />
+        <span>{level}</span>
       </div>
       <div>
-        <label htmlFor="statement">Statement:</label>
+        <label htmlFor="statement">Question :</label>
         <textarea
           id="statement"
           value={statement}
@@ -113,7 +120,7 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="hint">Hint:</label>
+        <label htmlFor="hint">Indice :</label>
         <textarea
           id="hint"
           value={hint}
@@ -121,7 +128,7 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="questionComment">Question Comment:</label>
+        <label htmlFor="questionComment">Commentaire de la question (précision à apporter) :</label>
         <textarea
           id="questionComment"
           value={questionComment}
@@ -129,7 +136,7 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="answer">Answer:</label>
+        <label htmlFor="answer">Réponse :</label>
         <textarea
           id="answer"
           value={answer}
@@ -138,7 +145,7 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="explanation">Explanation:</label>
+        <label htmlFor="explanation">Explication :</label>
         <textarea
           id="explanation"
           value={explanation}
@@ -146,7 +153,7 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="answerComment">Answer Comment:</label>
+        <label htmlFor="answerComment">Commentaire de réponse (plusieurs réponses possible par exemple):</label>
         <textarea
           id="answerComment"
           value={answerComment}
@@ -154,7 +161,7 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="answerSource">Answer Source:</label>
+        <label htmlFor="answerSource">Source de la réponse :</label>
         <textarea
           id="answerSource"
           value={answerSource}
@@ -162,40 +169,14 @@ const AddQuestion = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="originSource">Origin Source:</label>
+        <label htmlFor="originSource">Source de la question :</label>
         <textarea
           id="originSource"
           value={originSource}
           onChange={(e) => setOriginSource(e.target.value)}
         ></textarea>
       </div>
-      <div>
-        <label htmlFor="authorId">Author ID:</label>
-        <input
-          type="text"
-          id="authorId"
-          value={authorId}
-          onChange={(e) => setAuthorId(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="categoryId">Category:</label>
-        <select
-          id="categoryId"
-          value={subjectId}
-          onChange={(e) => setSubjectId(e.target.value)}
-          required
-        >
-          <option value="">Select a category</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button type="submit">Add Question</button>
+      <button type="submit">Ajouter une question</button>
     </form>
   );
 };
