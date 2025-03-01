@@ -65,7 +65,7 @@ router.get('/categories/:categoryId/subjects', async (req, res) => {
   });
 
 // Route to get questions by category ID
-router.get('/subject/:subjectId/questions', async (req, res) => {
+router.get('/subjects/:subjectId/questions', async (req, res) => {
     const { subjectId } = req.params;
     try {
         const result = await db.query('SELECT * FROM questions WHERE subject_id = $1', [subjectId]);

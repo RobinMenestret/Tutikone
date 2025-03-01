@@ -1,27 +1,75 @@
 @import url('@styles/graphic_chart.css');
 
 .browse-database {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #555;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-item {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list-item:hover {
+  background-color: #f1f1f1;
+}
+
+.question-details {
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  background-color: var(--background-color);
+  box-shadow: 0 0 10px var(--shadow-color);
+  animation: slide-in 0.5s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  
-  .list {
-    list-style-type: none;
-    padding: 0;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .list-item {
-    padding: 10px;
-    margin: 5px 0;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .list-item:hover {
-    background-color: var(--secondary-color);
-  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+td:first-child {
+  font-weight: bold;
+  width: 30%;
+}
