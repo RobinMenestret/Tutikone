@@ -40,23 +40,32 @@ h2 {
 }
 
 .question-details {
-  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 40%; /* Adjusted width to ensure table content fits */
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   padding: 20px;
-  margin: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px var(--shadow-color);
-  animation: slide-in 0.5s ease-out;
+  overflow-y: auto;
+  transition: right 0.3s ease;
+  z-index: 1000;
 }
 
-@keyframes slide-in {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.question-details.visible {
+  right: 0;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--tertiary-color);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: auto;
 }
 
 table {

@@ -11,6 +11,7 @@ const BrowseDatabase = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [showQuestionDetails, setShowQuestionDetails] = useState(false);
   const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -37,6 +38,7 @@ const BrowseDatabase = () => {
           setSelectedCategory(null); // Reset lower selections
           setSelectedSubject(null);
           setSelectedQuestion(null);
+          setShowQuestionDetails(false);
         } catch (error) {
           console.error('Error fetching categories:', error);
         }
@@ -55,6 +57,7 @@ const BrowseDatabase = () => {
           setSubjects(response.data);
           setSelectedSubject(null); // Reset lower selections
           setSelectedQuestion(null);
+          setShowQuestionDetails(false);
         } catch (error) {
           console.error('Error fetching subjects:', error);
         }
@@ -72,6 +75,7 @@ const BrowseDatabase = () => {
           const response = await axios.get(`${API_URL}/api/browsedb/subjects/${selectedSubject.id}/questions`);
           setQuestions(response.data);
           setSelectedQuestion(null); // Reset lower selections
+          setShowQuestionDetails(false);
         } catch (error) {
           console.error('Error fetching questions:', error);
         }
@@ -80,6 +84,15 @@ const BrowseDatabase = () => {
       fetchQuestions();
     }
   }, [selectedSubject, API_URL]);
+
+  const handleQuestionClick = (question) => {
+    setSelectedQuestion(question);
+    setShowQuestionDetails(true);
+  };
+
+  const handleCloseQuestionDetails = () => {
+    setShowQuestionDetails(false);
+  };
 
   return (
     <div className="browse-database">
@@ -123,7 +136,7 @@ const BrowseDatabase = () => {
           <h2>Choix de la question</h2>
           <ul className="list">
             {questions.map((question) => (
-              <li key={question.id} onClick={() => setSelectedQuestion(question)} className="list-item">
+              <li key={question.id} onClick={() => handleQuestionClick(question)} className="list-item">
                 {question.statement}
               </li>
             ))}
@@ -131,7 +144,8 @@ const BrowseDatabase = () => {
         </div>
       )}
       {selectedQuestion && (
-        <div className="section question-details">
+        <div className={`question-details ${showQuestionDetails ? 'visible' : ''}`}>
+          <button className="close-button" onClick={handleCloseQuestionDetails}>×</button>
           <h2>Détails de la question</h2>
           <table>
             <tbody>
@@ -162,28 +176,28 @@ const BrowseDatabase = () => {
                 <td>{selectedQuestion.answer}</td>
               </tr>
               {selectedQuestion.explanation && (
-              <tr>
-                <td><strong>Explication:</strong></td>
-                <td>{selectedQuestion.explanation}</td>
-              </tr>
+                <tr>
+                  <td><strong>Explication:</strong></td>
+                  <td>{selectedQuestion.explanation}</td>
+                </tr>
               )}
               {selectedQuestion.answer_comment && (
-              <tr>
-                <td><strong>Commentaire de réponse:</strong></td>
-                <td>{selectedQuestion.answer_comment}</td>
-              </tr>
+                <tr>
+                  <td><strong>Commentaire de réponse:</strong></td>
+                  <td>{selectedQuestion.answer_comment}</td>
+                </tr>
               )}
               {selectedQuestion.answer_source && (
-              <tr>
-                <td><strong>Source de la réponse:</strong></td>
-                <td><a href={selectedQuestion.answer_source} target="_blank" rel="noopener noreferrer">{selectedQuestion.answer_source}</a></td>
-              </tr>
+                <tr>
+                  <td><strong>Source de la réponse:</strong></td>
+                  <td><a href={selectedQuestion.answer_source} target="_blank" rel="noopener noreferrer">{selectedQuestion.answer_source}</a></td>
+                </tr>
               )}
               {selectedQuestion.origin_source && (
-              <tr>
-                <td><strong>Source de la question:</strong></td>
-                <td><a href={selectedQuestion.origin_source} target="_blank" rel="noopener noreferrer">{selectedQuestion.origin_source}</a></td>
-              </tr>
+                <tr>
+                  <td><strong>Source de la question:</strong></td>
+                  <td><a href={selectedQuestion.origin_source} target="_blank" rel="noopener noreferrer">{selectedQuestion.origin_source}</a></td>
+                </tr>
               )}
             </tbody>
           </table>
