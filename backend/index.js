@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 
 // Configuration CORS
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173', process.env.FRONTEND_URL];
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
