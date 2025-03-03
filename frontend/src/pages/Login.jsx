@@ -56,6 +56,8 @@ function Login() {
     }
   };
 
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${process.env.REACT_APP_CLIENT_GOOGLE}&redirect_uri=${process.env.REACT_APP_REDIRECT_GOOGLE}&response_type=code&scope=openid%20email%20profile`;
+
   return (
     <div className="login module">
       <h1>Sign In</h1>
@@ -81,6 +83,7 @@ function Login() {
         <button type="submit" className="button">Login</button>
       </form>
       {message && <p>{message}</p>}
+      <a href={googleAuthUrl} className="button">Connect with Google</a>
     </div>
   );
 }

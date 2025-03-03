@@ -6,6 +6,7 @@ import { UserContext } from '../UserContext';
 function Navbar() {
   const { user, setUser } = useContext(UserContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -18,21 +19,25 @@ function Navbar() {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const toggleNavbar = () => {
+    setNavbarOpen(!navbarOpen);
+  };
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${navbarOpen ? 'open' : ''}`}>
       <ul className="navbar-list">
-        <li className="navbar-item"><Link to="/">Accueil</Link></li>
-        {user && <li className="navbar-item"><Link to="/contribute">Contribuer</Link></li>}
-        <li className="navbar-item"><Link to="/browse">Naviguer</Link></li>
-        {user && <li className="navbar-item"><Link to="/settings">Settings</Link></li>}
-        {!user && <li className="navbar-item"><Link to="/login">Sign In</Link></li>}
-        {!user && <li className="navbar-item"><Link to="/register">Sign Up</Link></li>}
+        <li className="navbar-item"><Link to="/">ACCUEIL</Link></li>
+        {user && <li className="navbar-item"><Link to="/contribute">CONTRIBUER</Link></li>}
+        <li className="navbar-item"><Link to="/browse">NAVIGUER</Link></li>
+        {!user && <li className="navbar-item"><Link to="/login">CONNEXION</Link></li>}
+        {!user && <li className="navbar-item"><Link to="/register">INSCRIPTION</Link></li>}
         {user && (
           <li className="navbar-item">
             <div className="navbar-name" onClick={toggleDropdown}>
               <p>{user.username.toUpperCase()}</p>
               {dropdownOpen && (
                 <div className="dropdown-menu">
+                  <Link to="/settings"><p>Settings</p></Link>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
               )}

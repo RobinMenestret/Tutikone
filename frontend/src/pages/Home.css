@@ -3,28 +3,6 @@
     padding-left: 0;
     margin: 20px;
   }
-  
-  .examples {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .example {
-    flex: 1;
-    max-width: 30%;
-  }
-  
-  .example img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .example p {
-    margin-top: 10px;
-  }
   .rules {
     margin : 20px;
   }

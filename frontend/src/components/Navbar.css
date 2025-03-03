@@ -49,4 +49,6 @@
   .navbar-name:hover {
     background-color: var(--background-color);
   }
-  
+  .settings-button{
+    color: black;
+  }
